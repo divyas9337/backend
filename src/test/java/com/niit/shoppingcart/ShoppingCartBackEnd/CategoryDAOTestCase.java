@@ -28,9 +28,9 @@ public class CategoryDAOTestCase {
 		}
 		@Test
 		public void saveCategoryTestCase() {
-			category.setId("Womencategory001");
-			category.setName("women");
-			category.setDescription("this is women category");
+			category.setId("Mob001");
+			category.setName("Mobile");
+			category.setDescription("this is Mobile category");
 			
 			boolean status=categoryDAO.save(category);
 			assertEquals("save your test case",true,status);

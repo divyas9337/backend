@@ -2,6 +2,7 @@ package com.niit.shoppingcart.dao;
 
 
 
+import java.util.List;
 import java.util.Set;
 
 import com.niit.shoppingcart.domain.Category;
@@ -20,7 +21,9 @@ public interface CategoryDAO {
 	//delete the user
 	public boolean  delete(String id);
 	//to get all the users
-	public Set<Product> set();
+	public List<Category> list();
+		
+	
 	
 	
 }

@@ -1,7 +1,9 @@
 package com.niit.shoppingcart.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -18,12 +20,11 @@ public class Category {
 	private String id;
 	private String name;
 	private String description;
-	@OneToMany(mappedBy="category",fetch=FetchType.EAGER)
-	private Set<Product> products;
+	 @OneToMany(fetch = FetchType.EAGER, mappedBy = "category", cascade = CascadeType.ALL)
+	 private Set<Product> products;
 	public String getId() {
 		return id;
 	}
-	
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -44,7 +45,5 @@ public class Category {
 	}
 	public void setProducts(Set<Product> products) {
 		this.products = products;
-	}
-	
-	
+	}	
 }

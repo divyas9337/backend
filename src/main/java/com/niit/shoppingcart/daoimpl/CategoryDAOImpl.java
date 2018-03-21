@@ -1,8 +1,8 @@
 package com.niit.shoppingcart.daoimpl;
 
 
-import java.util.Set;
-
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.domain.Category;
-import com.niit.shoppingcart.domain.Product;
 
 
 @Repository("categoryDAO") 
@@ -72,9 +71,20 @@ public class CategoryDAOImpl implements CategoryDAO {
 			return true; 
 		}
 		
-	public Set<Product> set() {
+	/*public List<Category> set() {
 		// TODO Auto-generated method stub
-		return (Set<Product>) sessionFactory.openSession().createQuery("from Product").list();
+		//return (Set<Category>) sessionFactory.openSession().createQuery("from Category").list();
+		return (List<Category>)
+				  sessionFactory.openSession()
+				.createCriteria(Category.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+	}*/
+	public List<Category> list() {
+		// TODO Auto-generated method stub
+		return (List<Category>)
+				  sessionFactory.openSession()
+				.createCriteria(Category.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 	}
 
 

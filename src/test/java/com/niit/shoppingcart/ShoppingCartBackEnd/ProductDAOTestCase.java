@@ -29,10 +29,10 @@ public class ProductDAOTestCase {
 
 	@Test
 	public void saveProductDAOTestCase() {
-		product.setId("Lakme 001");
-		product.setName("Lakme...Product");
-		product.setDescription("This is Lakme Product");
-		product.setCategoryID("Womencategory001");
+		product.setId("Lenovo 001");
+		product.setName("Lenovo...Product");
+		product.setDescription("This is Lenovo Product");
+		product.setCategoryID("Mobile001");
 		product.setSupplierID("Divyas9337");
 		boolean status=productDAO.save(product);
 		assertEquals("save your test case",true,status);
