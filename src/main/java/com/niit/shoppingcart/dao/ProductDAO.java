@@ -1,8 +1,7 @@
 package com.niit.shoppingcart.dao;
 
 
-import java.util.Set;
-
+import java.util.List;
 import com.niit.shoppingcart.domain.Product;
 
 
@@ -16,7 +15,7 @@ public interface ProductDAO {
 	
 	public boolean  delete(String id);
 	
-	public Set<Product> set();
+	public List<Product> list();
 	
 	
 }

@@ -3,6 +3,7 @@ package com.niit.shoppingcart.daoimpl;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,6 +11,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.shoppingcart.dao.UserDAO;
 import com.niit.shoppingcart.domain.User;
@@ -17,10 +19,11 @@ import com.niit.shoppingcart.domain.User;
 @Repository("userDAO") //will create instance of UserDAOImpl and the name will userDAOImpl
 public class UserDAOImpl implements UserDAO {
 
-	//first -inject hibernate session 
+	
 	//@Autowire
 	@Autowired //session factory will automatically inject in this class
 	 SessionFactory sessionFactory;
+	@SuppressWarnings("unused")
 	@Autowired
 	
 	private User user;
@@ -85,13 +88,19 @@ public class UserDAOImpl implements UserDAO {
 		    }
 		return true; 
 	}
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public List<User> list() {
-		return sessionFactory.openSession().createQuery("from User").list();
+		return (List<User>)
+		  sessionFactory.openSession()
+		.createCriteria(User.class)
+		.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 	
 		}
 
+	@SuppressWarnings({ "deprecation", "static-access" })
+	@Transactional
 	public User validate(String emailID, String password) {
-		//select * user where emailID=divyas@gmail.com' and password='divs@123'
+		
 		return (User)sessionFactory.openSession().
 				createCriteria(User.class).
 				add(Restrictions.eq("emailID", emailID))

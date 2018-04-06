@@ -1,5 +1,6 @@
 package com.niit.shoppingcart.domain;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -9,12 +10,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+@SuppressWarnings("serial")
 @Component 
 
 @Entity 
 @Table(name="supplier") 
 
-public class Supplier {
+public class Supplier implements Serializable {
 	@Id
 	private String id;
 	private String name;

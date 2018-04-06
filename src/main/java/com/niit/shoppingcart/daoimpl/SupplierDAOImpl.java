@@ -1,10 +1,9 @@
 
 package com.niit.shoppingcart.daoimpl;
 
-import java.util.Set;
+import java.util.List;
 
-import javax.transaction.Transactional;
-
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,15 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.niit.shoppingcart.dao.SupplierDAO;
-import com.niit.shoppingcart.domain.Product;
 import com.niit.shoppingcart.domain.Supplier;
 
 @Repository //will create instance of UserDAOImpl and the name will userDAOImpl
 public class SupplierDAOImpl implements SupplierDAO {
 	@Autowired
 	SessionFactory sessionFactory;
+	@SuppressWarnings("unused")
 	@Autowired
-	private Supplier supplier;
+     private Supplier supplier;
+	 @SuppressWarnings("unused")
 	private Restrictions Restrictions;
 	public SupplierDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory=sessionFactory;
@@ -70,9 +70,15 @@ public class SupplierDAOImpl implements SupplierDAO {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	public Set<Product> set() {
+	
+	@SuppressWarnings({ "deprecation", "unchecked" })
+	public List<Supplier> list() {
 		// TODO Auto-generated method stub
-		return (Set<Product>) sessionFactory.openSession().createQuery("from Product").list();
+		return (List<Supplier>)
+				  sessionFactory.openSession()
+				.createCriteria(Supplier.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		
 	}
 
 	

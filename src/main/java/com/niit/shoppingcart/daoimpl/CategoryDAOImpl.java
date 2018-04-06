@@ -2,6 +2,10 @@ package com.niit.shoppingcart.daoimpl;
 
 
 import java.util.List;
+
+
+import javax.transaction.Transactional;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,7 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.domain.Category;
 
-
+@Transactional
 @Repository("categoryDAO") 
 public class CategoryDAOImpl implements CategoryDAO {
 
@@ -21,8 +25,10 @@ public class CategoryDAOImpl implements CategoryDAO {
 	//@Autowire
 	@Autowired //session factory will automatically inject in this class
 	 SessionFactory sessionFactory;
+	@SuppressWarnings("unused")
 	@Autowired
 	private Category category;
+	@SuppressWarnings("unused")
 	private Restrictions Restrictions;
 	public CategoryDAOImpl(SessionFactory sessionFactory) {
 		this.sessionFactory=sessionFactory;
@@ -33,7 +39,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 			Session session=sessionFactory.openSession();
 			Transaction tx=session.beginTransaction();
 			
-			session.save(category);
+			session.saveOrUpdate(category);
 			tx.commit();
 			session.clear();
 			
@@ -70,27 +76,23 @@ public class CategoryDAOImpl implements CategoryDAO {
 			    }
 			return true; 
 		}
-		
-	/*public List<Category> set() {
-		// TODO Auto-generated method stub
-		//return (Set<Category>) sessionFactory.openSession().createQuery("from Category").list();
-		return (List<Category>)
-				  sessionFactory.openSession()
-				.createCriteria(Category.class)
-				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
-	}*/
+	@SuppressWarnings({ "deprecation", "unchecked" })
 	public List<Category> list() {
 		// TODO Auto-generated method stub
+		//return  (List<Category>) sessionFactory.openSession().createQuery("from Category").list();
+		
 		return (List<Category>)
 				  sessionFactory.openSession()
 				.createCriteria(Category.class)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		}
 	}
-
-
+		
+	
+	
 
 		
-}
+
 
 
 

@@ -1,11 +1,8 @@
 package com.niit.shoppingcart.dao;
 
 
-import java.util.Set;
-
-import com.niit.shoppingcart.domain.Product;
+import java.util.List;
 import com.niit.shoppingcart.domain.Supplier;
-import com.niit.shoppingcart.domain.User;
 
 //Data Access object-DAO 
 public interface SupplierDAO {
@@ -19,7 +16,7 @@ public interface SupplierDAO {
 	//delete the user
 	public boolean  delete(String id);
 	//to get all the users
-	public Set<Product> set();
+	public List<Supplier> list();
 	//validate whether the credentials are correct or not
 	
 

@@ -2,6 +2,8 @@ package com.niit.shoppingcart.domain;
 
 
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -10,14 +12,16 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+@SuppressWarnings("serial")
 @Component
 @Entity
 @Table
-public class Product {
+public class Product implements Serializable {
 	@Id
 	private String id;
 	private String name;
 	private String description;
+	private int price;
 	private String categoryID;
 	private String supplierID;
 	@ManyToOne
@@ -68,6 +72,13 @@ public class Product {
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	
 	
 	
 
